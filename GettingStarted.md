@@ -269,7 +269,7 @@ Spock Framework 提供以更簡潔的 Groovy 語法撰寫測試案例，可以�
 
 [Spock Enterprise-ready Testing and Specification Framework](http://spockframework.org)
 
-Geb 大概是目前最強大的 Web UI Testing 工具，它可以撰寫簡單的 Groovy 程式來操作瀏覽器，完成網站各項畫面或表單的操作，利用類似 jQuery 的語法取得畫面的內容加以驗證，還能夠將網頁畫面截圖保存。Geb 對瀏覽器的自動化操作實際是透過 Selenium WebDriver 完成，但是它利用 Groovy DSL 的特性讓 Script 的撰寫變得十分容易。
+Geb 是非常好用的 Web UI Testing 工具，它讓開發者使用 Groovy 撰寫簡單的 Script 程式來操作瀏覽器，完成網站各項畫面或表單的操作，利用類似 jQuery 的語法取得畫面的內容加以驗證，還能夠將網頁測試結果及畫面截圖保存。Geb 對瀏覽器的自動化操作實際是透過 Selenium WebDriver 完成，但是它利用 Groovy DSL 的特性讓 Script 的撰寫變得十分容易。
 
 [Geb - Very Groovy Browser Automation](http://www.gebish.org/)
 
@@ -382,6 +382,8 @@ Groovy Shell 用於測試 API 時相當管用，舉例來說，如果你想用�
 Java Scripting Programmer's Guide
 JSR 223（Scripting for the Java Platform）
 JSR 223 Scripting with Groovy
+
+開發工具
 
 專案
 
