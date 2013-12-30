@@ -1,4 +1,4 @@
-<img src="https://lh5.googleusercontent.com/4YM_JnVm8NLgBxNF6WTRGnJbKnjWcXRFqpv7iS_iNKU=w2000-h998-no" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh5.googleusercontent.com/4YM_JnVm8NLgBxNF6WTRGnJbKnjWcXRFqpv7iS_iNKU=w2000-h998-no" alt="" style="max-width:100%" /></div>
 
 > Groovy - very good and enjoyable programming language
 
@@ -173,7 +173,7 @@ new File('.').eachFileMatch( ~/.*\.groovy/ ) {
 
 以微軟的 .NET 開發平台為例，MSDN 文件提供 C# / C++ / F# / JScript / VB 等五種不同語言的使用範例。雖然使用不同的程式語言撰寫，但它們都使用相同的 .NET Framework API。
 
-<img src="https://lh3.googleusercontent.com/-ZgFl-MH97-w/Urb9A4JjK3I/AAAAAAAAL9E/Fq0P7Pfd1Ts/w1936-h712-no/dot-net-api.jpg" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh3.googleusercontent.com/-ZgFl-MH97-w/Urb9A4JjK3I/AAAAAAAAL9E/Fq0P7Pfd1Ts/w1936-h712-no/dot-net-api.jpg" alt="" style="max-width:70%" /></div>
 
 Java 虛擬機器（Java Virtual Machine，簡稱 JVM）的設計亦支援 Polyglot Programming，就是不管用什麼語言撰寫程式碼，只要最後編譯成 Java Bytecode，就能夠在 JVM 虛擬機器平台中執行。
 
@@ -280,13 +280,13 @@ Geb 大概是目前最強大的 Web UI Testing 工具，它可以撰寫簡單的
 
 在安裝 JDK 之後必須設定 JAVA_HOME 環境變數，將其內容正確設定為 JDK 安裝的資料夾（例如：`C:\Program Files (x86)\Java\jdk1.7.0_45`）。
 
-![EnvironmentVariables](https://lh3.googleusercontent.com/-246QHP22ceE/UsFK7-2ZyeI/AAAAAAAAMAs/Mh08PB_rOdA/w914-h996-no/groovy2.png)
+<div style="text-align:center"><img src="https://lh3.googleusercontent.com/-246QHP22ceE/UsFK7-2ZyeI/AAAAAAAAMAs/Mh08PB_rOdA/w914-h996-no/groovy2.png" alt="" style="max-width:100%" /></div>
 
 取得 Groovy 的 Windows 安裝程式。
 
 Groovy 2.2.1 Windows Installer：[groovy-2.2.1-installer.exe](http://dist.codehaus.org/groovy/distributions/installers/windows/nsis/groovy-2.2.1-installer.exe) ([原始下載頁面](http://groovy.codehaus.org/Download)）
 
-![Groovy](https://lh3.googleusercontent.com/-4amH_9ugVo8/UsFJ2C7b98I/AAAAAAAAL_4/ScSJRglrMUY/w1026-h800-no/groovy1.png)
+<div style="text-align:center"><img src="https://lh3.googleusercontent.com/-4amH_9ugVo8/UsFJ2C7b98I/AAAAAAAAL_4/ScSJRglrMUY/w1026-h800-no/groovy1.png" alt="" style="max-width:100%" /></div>
 
 安裝完成後，可以在應用程式集找到「Start GroovyConsole」的啟動捷徑。
 
@@ -350,7 +350,7 @@ RedHat 或 CentOS 等 RPM-based Linux 系統，可以使用 `yum` 指令安裝�
 
 在 GroovyConsole 的程式碼編輯區，輸入一段 Groovy 程式碼，再點選上方工具列的「Execute Groovy Script」或選單的「Script / Run」，就可以在下方的訊息輸出畫面看到程式執行結果。
 
-<img src="https://lh4.googleusercontent.com/ZS7zT4__0mqRrFsS-S3o76STDJACncTj_-7KVcSbW0s=w1640-h1336-no" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh4.googleusercontent.com/ZS7zT4__0mqRrFsS-S3o76STDJACncTj_-7KVcSbW0s=w1640-h1336-no" alt="" style="max-width:100%" /></div>
 
 使用鍵盤組合鍵「Ctrl + R」可以方便執行寫好的程式碼。
 
@@ -360,19 +360,19 @@ RedHat 或 CentOS 等 RPM-based Linux 系統，可以使用 `yum` 指令安裝�
 
 Groovy Shell 提供「交談式」程式執行功能，讓開發者可以用來測試一些程式片段。在終端機輸入「`groovysh`」就可以進入 Groovy Shell 的畫面，這個工具類似 Python 的 IDLE 或 Ruby 的 IRB，提供 REPL（Read–eval–print loop）的操作介面。
 
-<img src="https://lh4.googleusercontent.com/MDAQv9o8HSyOmAt2UO9HFfDqfZ-12oIJ_1VgUmK6O0M=w1916-h1206-no" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh4.googleusercontent.com/MDAQv9o8HSyOmAt2UO9HFfDqfZ-12oIJ_1VgUmK6O0M=w1916-h1206-no" alt="" style="max-width:100%" /></div>
 
 Groovy Shell 用於測試 API 時相當管用，舉例來說，如果你想用某個 String 類別的物件方法，但是想不起方法的名稱，除了找 JavaDoc 查詢 API 用法外，還可以利用 TAB 按鍵查詢方法列表。
 
 例如輸入「`"abc".t`」或「`"abc".s`」再按下 TAB 按鍵，就會列出以 t 或 s 為首的相關方法。 
 
-<img src="https://lh5.googleusercontent.com/u5zBjED-T_bTw0sicMd8rRMpaL28wyuAdXNKSlgSlzk=w1916-h762-no" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh5.googleusercontent.com/u5zBjED-T_bTw0sicMd8rRMpaL28wyuAdXNKSlgSlzk=w1916-h762-no" alt="" style="max-width:100%" /></div>
 
 ## Groovy Web Console ##
 
 [Groovy Web Console](http://groovyconsole.appspot.com/) 是架設在 Google AppEngine 的網站服務，只要用瀏覽器打開「groovyconsole.appspot.com」，就可以在線上執行一段 Groovy Script，並且可以將 Code Snippets 透過網頁連結分享給其他人。
 
-<img src="https://lh6.googleusercontent.com/AXGKbI8Pk4o5UEbgdjNp_-hhEckyS-2X2v94OvK4aGw=w1568-h1336-no" alt="" style="width:100%" />
+<div style="text-align:center"><img src="https://lh6.googleusercontent.com/AXGKbI8Pk4o5UEbgdjNp_-hhEckyS-2X2v94OvK4aGw=w1568-h1336-no" alt="" style="max-width:100%" /></div>
 
 ## 學習資源 ##
 
