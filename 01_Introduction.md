@@ -2,25 +2,28 @@
 
 > Groovy - very good and enjoyable programming language
 
-韋氏字典（Merriam-Webster）對於 groovy 單字的定義是「very good and enjoyable」。在學習 Groovy 程式語言的過程中，能感受到恰如其名的「令人愉快」，簡單易學、輕鬆完成任務。
+查詢韋氏字典（Merriam-Webster），可以發現 Groovy 單字的[定義](http://www.merriam-webster.com/dictionary/groovy)是「*very good and enjoyable*」。學習 Groovy 程式語言的過程中，可以發掘許多 Groovy 帶來的樂趣，並且能夠用它輕鬆完成許多任務。
 
-Groovy 程式語言誕生於 2003 年，它的語法類似 Java 語言，但是比 Java 容易學習與使用，更適合剛入門學習寫程式的初學者。已經熟悉 Java 的開發者，也能很快學會使用 Groovy 寫程式，許多用 Java 寫起來很複雜的程式，改用 Groovy 能用更輕鬆簡單的方法完成。
+Groovy 程式語言在 2003 年問世，創造它的是 Apache Software Foundation 的軟體工程師 [James Strachan](http://people.apache.org/~jstrachan/)，目前專案的負責人則是 [Guillaume LaForge](http://glaforge.appspot.com/)。Groovy 是自由軟體，它採用 Apache 2.0 開放原始碼授權，第一個正式版本 1.0 在 2007 年發佈，從 2012 年發佈 2.0 版本後，Groovy 的發展更活躍，預期在 2014 年就會出現 3.0 的新版本。
+
+長久以來，許多 Java 開發者期待更好的語言，[Java.net](http://www.ibm.com/developerworks/opensource/library/j-jn1/index.html) 一直是受到關注的議題。日漸成熟的 Groovy 帶來新希望，它讓開發 Java 的世界變得更加敏捷，我們不必再等待 Java 8 或 Java 9 實現的新功能，有許多現代語言的方便特性，開始用 Groovy 就能做到。
+
+Groovy 的語法大致上和 Java 語言相似；但是卻比 Java 更容易學習與使用，也比更適合剛入門學習寫程式的初學者。已經熟悉 Java 的開發者，很快就能學會使用 Groovy 寫程式，有許多用 Java 寫起來很複雜的程式，改用 Groovy 就可以用更輕鬆簡單的方法完成，因此吸引不少 Java 開發者加入學習行列。
 
 ## A First Look at Groovy ##
 
-Groovy 可以當作 Scripting Language 執行，不必像 Java 需要宣告啓動類別與 ``main(String[] args)`` 主程式。因此最簡單的 Hello World 程式用 Groovy 撰寫只要一行，就像 Python 或 Ruby 一樣簡單。
+Groovy 可以當作 Scripting Language 執行，不必像 Java 至少需要定義主類別（Main-Class）與 ``main(String[] args)`` 方法提供主程式才能啟動。因此最簡單的 Hello World 程式用 Groovy 撰寫只需要一行，就像 Python 或 Ruby 這類語言一樣簡單易寫。
 
     println "Hello Groovy" 
 
-Groovy 是物件導向程式語言（Object-oriented Programming Language），假如我們要定義一個 Person 類別，具有 name 與 age 兩個屬性，並且在物件建構時指派屬性的初值，可以很簡單的做到：
+Groovy 是物件導向程式語言（Object-Oriented Programming Language），假如我們要定義一個 Person 類別，包含 name 與 age 兩個屬性，並且在物件建構時以參數指派屬性的初值，可以用很簡單的程式碼完成：
 
 ```
 class Person {
     def name, age
 }
 
-def p = new Person(name: "John", age: 21)
-
+def p = new Person(name: 'John', age: 21)
 println "${p.name}: ${p.age}"
 ```
 
@@ -55,6 +58,13 @@ public class Person {
 ```
 
 有趣的是上面這段標準的 Java 程式碼，其實也是一段符合 Groovy 語法規則的程式，可以直接使用 Groovy 以直譯方式執行它。對學習者來說，從 Groovy 開始學習，未來只要陸續熟悉更多 Java 語言的知識，就不難
+
+Groovy 簡化字串的操作，在使用雙引號「`"`」的字串內容中，可以利用「`${}`」夾帶變數、函數呼叫或計算式。
+
+	println "現在月份：${new Date().month}"
+	println "Square root of 199 is ${Math.sqrt(199)}"
+	println "運動強度建議每分鐘心跳數不超過 ${(220 - p.age) * 0.9}"
+
 
 Groovy 提供函數型程式設計（Functional Programming）的必要功能，例如 Lambda 及 Closure 的支援。函數型程式設計在 Java SE 8 才開始支援，但其實只要改用 Groovy 寫程式，使用 Java SE 6 或 7 + Groovy，就能開始撰寫函數型風格的程式。
 
