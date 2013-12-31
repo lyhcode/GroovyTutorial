@@ -1,4 +1,4 @@
-<div style="text-align:center"><img src="https://lh5.googleusercontent.com/4YM_JnVm8NLgBxNF6WTRGnJbKnjWcXRFqpv7iS_iNKU=w2000-h998-no" alt="" style="max-width:100%" /></div>
+<div style="text-align:center"><img src="http://www.codedata.com.tw/wp-content/uploads/2013/12/GroovyTutorial-624x467.png" alt="" style="max-width:100%" /></div>
 
 > Groovy - very good and enjoyable programming language
 
