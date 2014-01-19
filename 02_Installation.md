@@ -1,5 +1,7 @@
 # Groovy Tutorial（2）軟體安裝與開發環境設定 #
 
+![UnderWarterWorld](images/GroovyTutorial-underwaterworld.png)
+
 安裝 Groovy 很容易，只要在 Groovy 的官方網頁下載最新的 Binary Release，解壓縮之後就能開始使用。如果使用 Windows 作業系統，Groovy 也提供自動安裝程式，可以更容易完成安裝步驟。
 
 [Groovy 官方網站](http://groovy.codehaus.org/)
