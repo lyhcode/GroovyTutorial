@@ -1,3 +1,5 @@
+# Groovy Tutorial（1）認識 Groovy 的第一課 #
+
 ![GroovyTutorial](images/GroovyTutorial-624x467.png)
 
 > Groovy - very good and enjoyable programming language
@@ -189,7 +191,7 @@ map1.year = 2013
 map1 << [author: "John"]
 
 map1.each { key, value ->
-  println "${key} = ${value}"
+    println "${key} = ${value}"
 }
 ```
 
@@ -208,7 +210,6 @@ frame.contentPane << label
 frame.pack()
 frame.visible = true
 ```
-）
 
 若是將「使用 Swing API 設計 GUI 介面」視為一種應用領域（domain），領域描述語言（Domain Specific Languages，簡稱 DSL）就是為這個領域設計專門的語言。設計新語言聽起來似乎大費周章，但是在 Groovy 的世界，我們將會經常使用 DSL 設計程式。
 
@@ -437,6 +438,8 @@ Geb 是非常好用的 Web UI Testing 工具，它讓開發者使用 Groovy 撰�
 * [Groovy 官方網站](http://groovy.codehaus.org/)
 * [Guillaume Laforge's Blog](http://glaforge.appspot.com/)
 * [Koans](http://groovykoans.org/) the missing groovy tutorial
+* [Groovy Content on InfoQ](http://www.infoq.com/groovy)
+* [Groovy Zone](http://groovy.dzone.com/)
 
 JSR 223
 
