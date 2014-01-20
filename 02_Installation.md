@@ -286,11 +286,13 @@ IntelliJ IDEA 13 是筆者目前最喜愛的 Java IDE，它擁有許多面面俱
 
 [IntelliJ IDEA - The Best Groovy IDE](http://www.jetbrains.com/idea/features/groovy.html)
 
-免費的 IntelliJ IDEA Community Edition 已提供完整的 Groovy 專案功能，在建立新專案時，「New Project」視窗的左方可以選擇「Groovy」專案類型，在「Groovy library」選項選擇或設定 Groovy 版本，就可以新建一個 Groovy 專案。
+IntelliJ IDEA Community Edition（CE）是免費版本，功能雖然沒有 Ultimate Edition 完整支援企業開發需求，但 CE 已提供開發 Groovy 所需的專案建置功能。
+
+在使用 IDEA 建立新專案時，「New Project」視窗的左方可以選擇「Groovy」專案類型。在「Groovy library」選項選擇或設定 Groovy 版本，然後按下「Finish」按鈕，就可以建立一個全新的 Groovy 專案。
 
 ![IDEAGroovy01](images/idea-groovy-01.png)
 
-新建一個 Groovy 類別，利用 IDEA 的 GUI 工具執行或測試程式，在 IDE 工具的支援下，可以更方便進行除錯、自動完成程式碼或進行重構。
+在左側專案內容的「src」資料夾開啓右鍵選單，選擇新建一個 Groovy 類別，就可以開始撰寫 Groovy 的程式，利用 IDEA 的建置工具執行或測試程式。有了 IDEA 提供的各項便利功能，可以更方便進行除錯、自動完成程式碼或進行重構。
 
 ![IDEAGroovy02](images/idea-groovy-02.png)
 
