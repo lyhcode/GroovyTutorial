@@ -191,7 +191,7 @@ groovy -Dgroovy.grape.report.downloads=true ProgramName.groovy
 export JAVA_OPTS=-Dgroovy.grape.report.downloads=true
 ```
 
-## 關於 classfier 的設定 ##
+## @Grab 的 classfier 設定 ##
 
 Maven 提供 classfier 設定，可以將 artifact 進一步分類，在專案中常見的 classfier 有 `sources` 與 `javadoc` 兩種。
 
@@ -207,6 +207,87 @@ Maven 提供 classfier 設定，可以將 artifact 進一步分類，在專案�
 
 ```
 @Grab(group='net.sf.json-lib', module='json-lib', version='2.4', classifier='jdk15')
+```
+
+## 關於 @GrabExclude 與 @GrabConfig 設定 ##
+
+Grapes 賦予 Groovy 自動化的 Dependency Management 機制，當我們從 Maven Repository 取得一個 Artifact 時，其相依的其他 Artifact 也會一併被使用。使用 `grape` 工具的 `resolve` 指令，可以查詢一個 Artifact 有哪些其他相依的套件。
+
+例如 xalan 2.7.1 就依賴 xml-apis 這個套件。
+
+```
+$ grape resolve xalan xalan 2.7.1
+.groovy/grapes/xalan/xalan/jars/xalan-2.7.1.jar
+.groovy/grapes/xalan/serializer/jars/serializer-2.7.1.jar
+.groovy/grapes/xml-apis/xml-apis/jars/xml-apis-1.3.04.jar
+```
+
+如果程式用到的 A 套件，相依 B 與 C 套件；但是我們想把 C 套件排除，若很明確清楚需要這麼做，則可以用 `@GrabExclude` 設定。
+
+以下是使用 xalan 但排除 xml-apis 的設定範例。
+
+```
+@Grapes([
+  @Grab('xalan:xalan:2.7.1'),
+  @GrabExclude('xml-apis:xml-apis')
+])
+```
+
+另一個開發者需要知道的 Grape 設定，就是 `@GrabConfig` 的類別載入器（[ClassLoader](http://openhome.cc/Gossip/JavaGossip-V2/IntroduceClassLoader.htm) ）參數，它有 `systemClassLoader` 與 `initContextClassLoader` 兩個 boolean 值的設定。
+
+> systemClassLoader
+>
+> Set to true if you want to use the system classloader when loading the grape. This is normally only required when a core Java class needs to reference the grabbed classes, e.g. for a database driver accessed using DriverManager.
+>
+> initContextClassLoader
+>
+> Set to true if you want the context classloader to be initialised to the classloader of the current class or script. This is useful for libraries or frameworks that assume that the context classloader has been set. But be careful when using this flag as your script or class might behave differently when called directly (from the command line or from an IDE) versus when called from within a container, e.g. a web container or a JEE container.
+
+最常見需要設定 `@GrabConfig` 的情況，就是在使用 JDBC 存取資料庫時。我們通常不會用 `import` 取得資料庫驅動的類別，如果要取得 MySQL JDBC Driver 的 instance 常見的做法是：
+
+```
+Class.forName("com.mysql.jdbc.Driver").newInstance();
+```
+
+我們可以在外部設定檔（.properties）配置資料庫連線參數，包含使用哪一種資料庫驅動程式。使用 JDBC 的 DriverManager 可以動態建立連線物件，不僅連線字串（connection string）可以修改，資料庫驅動程式的名稱（例如 `com.mysql.jdbc.Driver`）也可透過設定來變更。
+
+```
+Connection conn = null;
+conn = DriverManager.getConnection("jdbc:mysql://...");
+```
+
+下列是幾種常見的資料庫驅動程式：
+
+* org.hsqldb:hsqldb:2.3.2
+* mysql:mysql-connector-java:5.1.29
+* net.sourceforge.jtds:jtds:1.3.1
+
+為了確保資料庫驅動程式的類別，我們需要在系統層級的 ClassLoader 使用 Grape，以下是搭配 MySQL Connector/J 驅動程式的 Grape 使用範例，在 `@GrabConfig` 設定 `systemClassLoader=true` 參數，如此才能讓 `Class.forName` 正常操作。
+
+```
+@Grapes([
+  @Grab('mysql:mysql-connector-java:5.1.29'),
+  @GrabConfig(systemClassLoader=true, initContextClassLoader=true)
+])
+import groovy.sql.Sql
+
+def sql=Sql.newInstance("jdbc:mysql://localhost/test", "root", "", "com.mysql.jdbc.Driver")
+println sql.firstRow('SELECT * FROM INFORMATION_SCHEMA.COLUMNS')
+```
+
+如果沒有加上 `systemClassLoader=true` 的設定，就會發生「No suitable driver found」的錯誤。
+
+```
+Caught: java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost/test
+java.sql.SQLException: No suitable driver found for jdbc:mysql://localhost/test
+	at RunSQL.run(RunSQL.groovy:4)
+```
+
+`@Grapes` 區塊的設定，可以再加以簡化，只留下 `@Grab` 與 `@GrabConfig` 的語法部分。
+
+```
+@Grab('mysql:mysql-connector-java:5.1.29')
+@GrabConfig(systemClassLoader=true, initContextClassLoader=true)
 ```
 
 ## Groovy Script 的應用 ##
@@ -248,8 +329,12 @@ def url = 'https://news.google.com.tw/nwshp?hl=zh-TW&tab=wn'
 
 def parser = new SAXParser()
 parser.setFeature('http://xml.org/sax/features/namespaces', false)
+
 def page = new XmlParser(parser).parse(url)
-def data = page.depthFirst().DIV.grep{ it.'@class'=='title' }
+
+def data = page.depthFirst().DIV.grep {
+  it.'@class'=='title'
+}
 
 data.each {
   println it.A.SPAN.text()
@@ -272,9 +357,6 @@ chmod a+x MyParser.groovy
 
 ![Grapes Report](images/run-groovy-grapes-report.png)
 
-這個程式的執行結果，會將 Google News 發燒新聞區塊的標題文字，全部以清單方式列出。
+這支程式讀取 Google News 首頁的 HTML 原始碼，利用 NekoHTML 的 `SAXParser` 解析，搭配 Groovy 的 `grep` 方法，找出每一條發燒新聞的標題。
 
-使用 Groovy 撰寫 Script 程式，可以搭配 Crontab 排程執行、與其他 command-line 工具共同完成任務。對於 Java 開發者來說，有很多應用方式
-
-## 參考資料 ##
-
+使用 Groovy 撰寫 Script 程式，可以搭配 Crontab 排程執行、利用 Shell 的 pipeline 與其他 command-line 工具併用。對於 Java 開發者來說，有許多系統維護的小程式，都可以利用 Groovy Script 開發，已經開發好的 Java Library 能被直接使用，加上 Groovy 更簡潔易寫的語法，可以用更短的時間輕鬆達成任務。
