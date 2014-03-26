@@ -1,6 +1,12 @@
 # Groovy Tutorial（4）使用 Grape 與 Grab #
 
-Java 世界有大量豐富的 Library，可以被重複利用的函式庫，封裝成 JAR 檔案發佈，大部份開放原始碼的專案，都可以在 Maven Repository 找到最新版本的 JAR 檔案。Groovy 提供 Grape 與 Grab 的功能，讓開發者可以方便使用相關套件資源，很輕鬆地利用 Groovy Script 完成許多任務。
+[Groovy Tutorial（3）淺談 Closure 程式設計 << 前情](http://www.codedata.com.tw/java/groovy-tutorial-03-closure/)
+
+Java 世界蘊藏豐富的各式各樣開發資源，大量可加以利用的函式庫，被封裝成 JAR 檔案發佈，幾乎能滿足各種應用開發的基礎需求。
+
+撰寫 Groovy 程式時，我們可以撰寫比 Java 更簡潔的程式碼，看起來更像那些現代化程式語言。許多新興程式語言雖然熱門，但是開發應用所需的 Library 非常缺乏，以至於經常需要重新造輪子；Groovy 開發者幸運得多，因為發展久遠且受到大型企業愛用的 Java 累積豐富的資源，在 Groovy 程式能直接加以利用。
+
+大部份 Java 開放原始碼的專案，都可以在 Maven Repository 找到最新版本的 JAR 檔案。而 Groovy 提供 Grape 功能，讓開發者方便從 Repository 取得所需套件，只要輕鬆撰寫 Groovy Script 就能完成許多任務。
 
 ## 認識 Maven Repository ##
 
@@ -190,6 +196,23 @@ groovy -Dgroovy.grape.report.downloads=true ProgramName.groovy
 ```
 export JAVA_OPTS=-Dgroovy.grape.report.downloads=true
 ```
+
+## 設定 Repository 來源 ##
+
+Grape 提供預設的 Central Maven Repository 設定，因此常用的 Open Source Java Library 大多可以順利自動下載。但是也有一些 Library 並未發佈到 Central Repository 站台，就需要自行設定 Repository 的來源，使用的語法是 `@GrabResolver` 設定。
+
+```
+@GrabResolver(name='restlet.org', root='http://maven.restlet.org/')
+@Grab(group='org.restlet', module='org.restlet', version='1.1.9')
+```
+
+Java Open Source 專案的開發者，可以利用 Maven（pom.xml）或 Gradle 工具，把打包的 JAR 檔案發佈到免費的 [Central Repository](http://central.sonatype.org/)，就能夠輕鬆在 Groovy Script 中使用 Grape 利用自行開發的 Library。
+
+使用 Java 開發商業軟體的團隊，通常建議自行架設維護私有的 Repository，[Sonatype Nexus](http://www.sonatype.org/nexus/) 提供免費的 OSS 與商業的 PRO 版本，是目前架設 Maven Repository Server 最常見的伺服器軟體。
+
+對於現代的 Java 專案開發，實務上我們會這麼做：需要被重複共用的 Component 獨立成新專案或子專案，使用 Maven 或 Gradle 進行自動化建置，再搭配 Jenkins CI 持續整合，最後將通過 Test 的產出（JAR 檔案）發佈到 Nexus Repository。
+
+通常一個有些規模的 Java 專案，會使用到很多自行開發的封裝元件（JAR），Groovy Script 使用 Grape 存取 Maven Repository 的功能，帶給開發團隊很多好處：更容易測試這些獨立的元件，只要撰寫很簡單的 Script 程式碼，就能示範這些自行開發的元件如何使用，也能輕鬆使用 Script 方式來維護 Java 開發的系統。
 
 ## @Grab 的 classfier 設定 ##
 
