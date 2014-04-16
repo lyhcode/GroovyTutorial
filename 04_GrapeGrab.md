@@ -339,7 +339,9 @@ for (a in this.args) {
 @Grab('net.sourceforge.nekohtml:nekohtml:1.9.20')
 ```
 
-範例程式的主要功能是從 ![Google News](images/google-hot-news.png) 網頁右下方的「發燒新聞」，取得每個新聞標題文字。
+範例程式的主要功能是從 [Google News](https://news.google.com.tw/) 網頁右下方的「發燒新聞」，取得每個新聞標題文字。
+
+![Google News](images/google-hot-news.png)
 
 `MyParser.groovy` 範例程式碼。
 
