@@ -48,12 +48,14 @@ Geb 基於 WebDriver 的良好基礎，所以 WebDriver 支援的瀏覽器，在
 
 ```
 @Grapes([
-    @Grab("org.gebish:geb-core:0.9.2"),
-    @Grab("org.seleniumhq.selenium:selenium-firefox-driver:2.26.0"),
-    @Grab("org.seleniumhq.selenium:selenium-support:2.26.0")
+    @Grab('org.gebish:geb-core:0.9.2'),
+    @Grab('org.seleniumhq.selenium:selenium-firefox-driver:2.42.0'),
+    @Grab('org.seleniumhq.selenium:selenium-support:2.42.0')
 ])
 import geb.Browser
 ```
+
+為了確保 Geb 能夠正常運作，除了盡可能使用最新 Stable 版本的 Geb 之外，也建議使用最新版本的 Firefox 瀏覽器，並搭配最新的 Selenium WebDriver 套件。在 [MVNRepository](http://mvnrepository.com/) 網站可以搜尋 `selenium-firefox-driver` 關鍵字，以獲取最新的版本編號。如果遇到 Geb 無法正常驅動瀏覽器操作的問題，通常都是版本設定在某些搭配下所產生的異常。
 
 如果搭配 Gradle 建置 Groovy/Geb 專案，則必須在 build.gradle 加入以下 dependencies 設定。
 
@@ -128,26 +130,27 @@ Browser.drive {
 }
 ```
 
-自動化操作 Google 搜尋的範例，使用 Geb 的 DSL 語法撰寫相當簡單易懂。
+以下是自動化操作 Google 搜尋的完整範例，使用 Geb 的 DSL 語法撰寫相當簡單易懂。
 
 ```
+@Grapes([
+    @Grab('org.gebish:geb-core:0.9.2'),
+    @Grab('org.seleniumhq.selenium:selenium-firefox-driver:2.42.0'),
+    @Grab('org.seleniumhq.selenium:selenium-support:2.42.0')
+])
 import geb.Browser
- 
+
 Browser.drive {
-    go "http://google.com/ncr"
+    go 'https://www.google.com.tw/'
  
-    assert title == "Google"
- 
-    $("input", name: "q").value("wikipedia")
- 
-    waitFor { title.endsWith("Google Search") }
- 
-    def firstLink = $("li.g", 0).find("a.l")
-    assert firstLink.text() == "Wikipedia"
- 
-    firstLink.click()
- 
-    waitFor { title == "Wikipedia" }
+    waitFor { title.startsWith('Google') }
+
+    $('input', name: 'q').value('CodeData')
+    $('input', name: 'btnI').click()
+
+    waitFor { title.endsWith('CodeData') }
+
+    println $('div.article h3 a').text()
 }
 ```
 
