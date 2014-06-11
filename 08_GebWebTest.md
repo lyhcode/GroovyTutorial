@@ -64,6 +64,18 @@ Browser.drive {
     quit()
 ```
 
+對於排程執行或是在終端機下執行的 Geb 程式，需要將瀏覽器視窗關閉，才能讓 Groovy 程式停止執行返回 Shell。
+
+```
+Browser.drive {
+    go 'http://www.codedata.com.tw/'
+    
+    // 執行一些自動化操作
+    
+    close()
+}
+```
+
 ## 使用 Navigator API ##
 
 使用 Geb 命令瀏覽器開啟一個網頁之後，就可以開始對網頁畫面元素（elements）進行存取或控制。例如取得文字內容或填寫、點選表單元件等，這些流程是瀏覽器自動化的常見操作。
@@ -199,3 +211,9 @@ Browser.drive {
 
 * /tmp/codedata-home.html
 * /tmp/codedata-home.png
+
+以下是瀏覽器網頁畫面截圖的範例，對自動化測試的任務，保留各階段測試的畫面，可以彙整成一份更詳盡的測試報告。如果要撰寫一個 Web Screen Capture 的程式，使用 Geb 也可以輕鬆完成。
+
+![Geb Report Sample](images/geb-report-sample.png)
+
+
