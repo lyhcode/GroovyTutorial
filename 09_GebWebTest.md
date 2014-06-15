@@ -1,6 +1,6 @@
 # Groovy Tutorial（9）使用 Geb 開發 Web Test 網站自動化測試（下） #
 
-[Groovy Tutorial（8）使用 Geb 開發 Web Test 網站自動化測試（中）](http://www.codedata.com.tw/java/groovy-tutorial-8-greb-web-test-part2/)
+[Groovy Tutorial（8）使用 Geb 開發 Web Test 網站自動化測試（中） << 前情](http://www.codedata.com.tw/java/groovy-tutorial-8-greb-web-test-part2/)
 
 本篇介紹 Geb 如何切換 WebDriver 以支援不同的瀏覽器，以及使用 Page Object 讓自動化測試代碼更容易被重複使用，最後在探討與 Java 測試框架的整合方式。希望讀者在看過本系列的三篇介紹後，能夠開始動手利用 Geb 完成一些 Web 專案的測試任務，從中體驗 Groovy 能讓工作更輕鬆完成的樂趣。
 

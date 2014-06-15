@@ -1,6 +1,6 @@
 # Groovy Tutorial（8）使用 Geb 開發 Web Test 網站自動化測試（中） #
 
-[Groovy Tutorial（7）使用 Geb 開發 Web Test 網站自動化測試（上）](http://www.codedata.com.tw/java/groovy-tutorial-7-greb-web-test-part1/)
+[Groovy Tutorial（7）使用 Geb 開發 Web Test 網站自動化測試（上） << 前情](http://www.codedata.com.tw/java/groovy-tutorial-7-greb-web-test-part1/)
 
 上一篇已初步介紹 Geb 工具的，對於這套瀏覽器自動化解決方案有興趣的讀者，請再跟著本篇提供的範例，動手開始實作自己的程式。以強大的 Selenium WebDriver 為核心，結合類似 jQuery 的 DOM 選取與操作方式，使用 Groovy DSL 易讀易寫的語法開發，使得 Geb 成為受矚目的新一代瀏覽器自動化測試工具。
 
