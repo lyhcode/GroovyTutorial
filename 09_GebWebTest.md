@@ -2,7 +2,9 @@
 
 [Groovy Tutorial（8）使用 Geb 開發 Web Test 網站自動化測試（中） << 前情](http://www.codedata.com.tw/java/groovy-tutorial-8-greb-web-test-part2/)
 
-本篇介紹 Geb 如何切換 WebDriver 以支援不同的瀏覽器，以及使用 Page Object 讓自動化測試代碼更容易被重複使用，最後在探討與 Java 測試框架的整合方式。希望讀者在看過本系列的三篇介紹後，能夠開始動手利用 Geb 完成一些 Web 專案的測試任務，從中體驗 Groovy 能讓工作更輕鬆完成的樂趣。
+我們希望讀者在閱讀完本系列的文章後，就有足夠的基礎知識可以開始動手寫 Geb 測試程式。三篇介紹並不足以涵蓋所有 Geb 與 Selenium 的開發細節，僅能挑選重點、入門常見的問題
+
+作為 Geb 系列的最後一篇教學，WebDriver 以支援不同的瀏覽器，以及使用 Page Object 讓自動化測試代碼更容易被重複使用，最後在探討與 Java 測試框架的整合方式。希望讀者在看過本系列的三篇介紹後，能夠開始動手利用 Geb 完成一些 Web 專案的測試任務，從中體驗 Groovy 能讓工作更輕鬆完成的樂趣。
 
 ## 跨瀏覽器測試支援 ##
 
@@ -23,13 +25,15 @@ Selenium 早期就是搭配 Firefox 瀏覽器發展，所以在 Geb 預設也是
 
 以上兩種設定方式都可以被 Geb 接受，但是使用「`new FirefoxDriver()`」必須先引入（import）指定的類別，否則會顯示無法找到類別（ClassNotFoundException）。
 
+## HtmlUnit Driver ##
+
 首先要介紹的是 WebDriver 是 HtmlUnitDriver，如果在沒有 GUI 環境的 Server 上執行 Geb 測試程式，就無法使用一般網頁瀏覽器，HtmlUnit 是 Java 平台用於滿足瀏覽器測試需求的函式庫，它可以在沒有 GUI 環境的 console 中執行，支援許多瀏覽器行為操作的模擬，包含一些使用 JavaScript 的 AJAX 互動網頁。
 
 若要將 WebDriver 切換為 HtmlUnitDriver，需要先使用 `@Grab` 配置相依的套件再作 `driver` 的設定。 
 
 ```
 @Grapes([
-    @Grab('org.gebish:geb-core:0.9.2'),
+    @Grab('org.gebish:geb-core:0.9.3'),
     @Grab('org.seleniumhq.selenium:selenium-htmlunit-driver:2.42.0'),
     @Grab('org.seleniumhq.selenium:selenium-support:2.42.0')
 ])
@@ -50,6 +54,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver
 driver = new HtmlUnitDriver()
 ```
 
+## Chrome Driver ##
+
 使用 Geb 搭配其他瀏覽器時，需要先配置所需的執行環境，以 Google Chrome 瀏覽器為例，必須先下載安裝 ChromeDriver 並配置 `webdriver.chrome.driver` 系統環境變數。
 
 先下載最新版本的 [ChromeDriver](http://chromedriver.storage.googleapis.com/index.html) 檔案，目前提供的作業系統支援包含 Linux（32 及 64 位元）、Mac(32 位元) 及 Windows（32 位元）。
@@ -65,7 +71,7 @@ driver = new HtmlUnitDriver()
 
 ```
 @Grapes([
-    @Grab('org.gebish:geb-core:0.9.2'),
+    @Grab('org.gebish:geb-core:0.9.3'),
     @Grab('org.seleniumhq.selenium:selenium-chrome-driver:2.42.0'),
     @Grab('org.seleniumhq.selenium:selenium-support:2.42.0')
 ])
@@ -90,6 +96,8 @@ Browser.drive {
 
 以下是 `Page` 物件定義的範例，在 `content` 區塊中，我們將該網頁內容需要被自動化操作的 DOM 元件，先透過 Navigator API 找到，就能夠方便在測試程式中使用。
 
+* LoginPage.groovy
+
 ```
 import geb.Page
      
@@ -97,12 +105,18 @@ class LoginPage extends Page {
     static url = "http://localhost:8080/user/login"
     static at = { heading.text() == "Login Form" }
     static content = {
-        heading { $(".page-title") }
-        loginForm { $(".login-form") }
-        loginButton(to: DashboardPage) { loginForm.login() }
+        heading { $("h1.page-title") }
+        loginForm { $("form.login-form") }
+        loginButton(to: DashboardPage) { $("button.submit") }
     }
 }
- 
+```
+
+* DashboardPage.groovy
+
+```
+import geb.Page
+
 class DashboardPage extends Page {
     static at = { heading.text() == "My Dashboard" }
     static content = {
@@ -133,15 +147,17 @@ Browser.drive {
 }
 ```
 
+定義好的 Page 物件可以被重複使用，依照測試案例（test case）的需求，組合成不同的測試執行流程。對於中大型的 Web Application 自動化測試，Geb 的 Page 物件讓測試程式的維護更容易。
+
 ## 搭配單元測試框架 ##
 
-使用 Geb 撰寫的測試程式，可以作為專案自動化測試的項目，搭配 IDE 開發工具或 Jenkins CI 持續整合，讓瀏覽器自動化測試的結果，與其它單元測試項目一併被執行與產生測試報告。Geb 可以和常見的 Java 測試框架搭配使用，例如：
+使用 Geb 撰寫的測試程式，可以作為專案自動化功能測試（functional test）的項目，搭配 IDE 開發工具或 Jenkins CI 持續整合，讓瀏覽器自動化測試的結果，與其它單元測試項目一併被執行與產生測試報告。Geb 可以和常見的 Java 測試框架搭配使用，例如：
 
 * Spock
 * JUnit
 * TestNG
 
-以下是搭配 Spock 框架的測試程式範例。
+以下是搭配 Spock 測試框架的測試程式範例。
 
 ```
 import geb.Page
@@ -167,6 +183,23 @@ class LoginSpec extends GebSpec {
 }
 ```
 
+在搭配 Spock 框架使用時，需要額外的 [geb-spock](http://mvnrepository.com/artifact/org.gebish/geb-spock) 套件。
+
+    @Grab('org.gebish:geb-spock:0.9.3')
+
+## Gradle、Spock、Geb 測試流程整合 ##
+
+簡易的 Geb 測試程式只要用 Groovy Script 方式撰寫，但是對一個完整的 Web 專案測試而言，上百甚至上千行的 Script 程式碼，將會讓測試程式變得難以維護。在實務上我們必須搭配自動化專案建置工具與測試框架，讓 Geb 的測試程式也能為專案建置的一部份。
+
+在實務經驗上可行的開發工具組合建議是：
+
+* 搭配 Gradle 專案自動化建置
+* 使用 Geb Page Objects 定義每個需要被測試的頁面
+* 利用 Spock 或 JUnit 撰寫單元測試案例
+
+
+
 ## 參考資源 ##
 
 * [The Book of Geb](http://www.gebish.org/manual/current/)
+* [Taming Functional Web Testing with Spock and Geb](http://www.infoq.com/presentations/testing-spock-geb) ([slides](http://qconlondon.com/dl/qcon-london-2013/slides/PeterNiederwieser_TamingFunctionalWebTestingWithSpockAndGeb.pdf))
