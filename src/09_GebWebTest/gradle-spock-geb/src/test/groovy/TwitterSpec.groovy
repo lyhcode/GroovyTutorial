@@ -7,8 +7,8 @@ class TwitterSpec extends GebSpec {
         to LoginPage
 
         when:
-        $('input.js-username-field').value("lyhcode")
-        $('input.js-password-field').value("u04cj/6123")
+        $('input.js-username-field').value("username")
+        $('input.js-password-field').value("password")
 
         and:
         loginButton.click()

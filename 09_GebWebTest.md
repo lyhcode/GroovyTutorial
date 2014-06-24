@@ -199,6 +199,8 @@ class LoginSpec extends GebSpec {
 
 
 
+請參考本文附錄的[完整程式碼](https://github.com/lyhcode/GroovyTutorial/tree/master/src/09_GebWebTest/gradle-spock-geb)。
+
 ## 參考資源 ##
 
 * [The Book of Geb](http://www.gebish.org/manual/current/)
