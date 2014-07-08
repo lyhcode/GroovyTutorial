@@ -223,7 +223,7 @@ dependencies {
 
 分別定義兩個 Page 物件，分別對應 Twitter 登入表單與主畫面。
 
-* src/test/groovy/LoginPage.groovy（登入表單）
+範例：`src/test/groovy/LoginPage.groovy`（登入表單）
 
 ```
 import geb.Page
@@ -239,7 +239,7 @@ class LoginPage extends Page {
 }
 ```
 
-* src/test/groovy/DashboardPage.groovy（主畫面）
+範例：`src/test/groovy/DashboardPage.groovy`（主畫面）
 
 ```
 import geb.Page
@@ -254,7 +254,7 @@ class DashboardPage extends Page {
 
 使用 Spock 定義一個測試案例，驗證輸入正確的帳號密碼後顯示主畫面。
 
-* src/test/groovy/TwitterSpec.groovy
+範例：`src/test/groovy/TwitterSpec.groovy`
 
 ```
 import geb.Page
