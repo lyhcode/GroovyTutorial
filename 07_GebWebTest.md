@@ -14,19 +14,19 @@ Geb 是瀏覽器自動化（browser automation）的解決方案 ，它是 Groov
 
 撰寫程式自動化測試網站各項功能，並無法取代所有測試工作的人工作業，因為許多人腦可以很容易處理的資訊，並無法輕易用程式取代。自動化測試無法完全取代網站測試所需的人工作業，但我們仍期望 80/20 法則能實踐，至少八成枯燥乏味的重複作業，能夠撰寫自動化測試程式取代，讓測試人員專注完成更重要的工作。
 
-## Sellenium WebDriver 簡介 ##
+## Selenium WebDriver 簡介 ##
 
-[Sellenium](http://docs.seleniumhq.org/) 是為瀏覽器自動化（Browser Automation）需求所設計的一組工具集，它讓我們直接用真實的瀏覽器來自動操作一個網站，將 Sellenium 應用在自動化測試時，除了檢驗網頁內容、填寫表單等基本操作，也能驗證 JavaScript 的功能是否正常執行等，因為 Sellenium 操作的網站畫面就是瀏覽器呈現給使用者的最終結果。
+[Selenium](http://docs.seleniumhq.org/) 是為瀏覽器自動化（Browser Automation）需求所設計的一組工具集，它讓我們直接用真實的瀏覽器來自動操作一個網站，將 Selenium 應用在自動化測試時，除了檢驗網頁內容、填寫表單等基本操作，也能驗證 JavaScript 的功能是否正常執行等，因為 Selenium 操作的網站畫面就是瀏覽器呈現給使用者的最終結果。
 
-如果是第一次接觸 Sellenium 的讀者，可以從 Sellenium IDE 這個工具開始認識。Sellenium IDE 需要搭配 Firefox 瀏覽器使用，在安裝 [Sellenium IDE Plugins](http://docs.seleniumhq.org/projects/ide/) 之後，我們就能在 Firefox 瀏覽器打開 Sellenium IDE 視窗，進行網站操作的「錄製」，然後再「重播」一次所有被錄下來的動作。這就是 Sellenium 進行網站自動化測試的基礎，我們需要先建立一組測試案例（Test Case），定義那些需要被執行的步驟，例如填寫表單、按下送出按鈕等，然後再重複執行這些動作，檢查其結果是否符合預期。
+如果是第一次接觸 Selenium 的讀者，可以從 Selenium IDE 這個工具開始認識。Selenium IDE 需要搭配 Firefox 瀏覽器使用，在安裝 [Selenium IDE Plugins](http://docs.seleniumhq.org/projects/ide/) 之後，我們就能在 Firefox 瀏覽器打開 Selenium IDE 視窗，進行網站操作的「錄製」，然後再「重播」一次所有被錄下來的動作。這就是 Selenium 進行網站自動化測試的基礎，我們需要先建立一組測試案例（Test Case），定義那些需要被執行的步驟，例如填寫表單、按下送出按鈕等，然後再重複執行這些動作，檢查其結果是否符合預期。
 
-![Sellenium IDE](images/sellenium-ide-google-search.png)
+![Selenium IDE](images/selenium-ide-google-search.png)
 
-許多 Web Test Framework，都是以 Sellenium API 作為基礎，功能強大且穩固已經讓 Sellenium 成為瀏覽器自動化的基石。Sellenium 2.0 帶來 WebDriver 的實作，跨越不同瀏覽器的自動化操作，有更清楚定義的標準可循，目前 [WebDriver API](http://www.w3.org/TR/webdriver/) 規範已提交 W3C，若能夠被標準化且在各大瀏覽器實作，執行跨瀏覽器的自動化測試工作將會被簡化許多。
+許多 Web Test Framework，都是以 Selenium API 作為基礎，功能強大且穩固已經讓 Selenium 成為瀏覽器自動化的基石。Selenium 2.0 帶來 WebDriver 的實作，跨越不同瀏覽器的自動化操作，有更清楚定義的標準可循，目前 [WebDriver API](http://www.w3.org/TR/webdriver/) 規範已提交 W3C，若能夠被標準化且在各大瀏覽器實作，執行跨瀏覽器的自動化測試工作將會被簡化許多。
 
-在 Sellenium 及開放源碼社群的努力下，已有許多 WebDriver 可供使用，包含目前佔有率最高的 Google Chrome、Firefox 與 InternetExplorer，已能滿足大多數網站自動化測試的需求。
+在 Selenium 及開放源碼社群的努力下，已有許多 WebDriver 可供使用，包含目前佔有率最高的 Google Chrome、Firefox 與 InternetExplorer，已能滿足大多數網站自動化測試的需求。
 
-Sellenium WebDriver API 支援 Java、C#、Ruby、Python 及 Perl 等多種語言，以下是 Java 語言的範例程式碼，示範以 Firefox 瀏覽器打開 Google 網站、搜尋關鍵字「geb」的自動化操作。
+Selenium WebDriver API 支援 Java、C#、Ruby、Python 及 Perl 等多種語言，以下是 Java 語言的範例程式碼，示範以 Firefox 瀏覽器打開 Google 網站、搜尋關鍵字「geb」的自動化操作。
 
 ```
 WebDriver driver = new FirefoxDriver();
@@ -40,7 +40,7 @@ driver.quit();
 
 ## 開始使用 Geb ##
 
-儘管 Sellenium 提供的 WebDriver API 已經相當容易使用，但是在撰寫 Web Application 的自動化測試案例時，我們仍希望有更輕鬆的方式可以完成任務；過於冗長難以維護修改的測試程式碼，很容易造成自動化測試的理想在日後難以維繫。
+儘管 Selenium 提供的 WebDriver API 已經相當容易使用，但是在撰寫 Web Application 的自動化測試案例時，我們仍希望有更輕鬆的方式可以完成任務；過於冗長難以維護修改的測試程式碼，很容易造成自動化測試的理想在日後難以維繫。
 
 Geb 基於 WebDriver 的良好基礎，所以 WebDriver 支援的瀏覽器，在 Geb 也同樣能操作。利用 Groovy DSL 易讀易寫的優點，Geb 提供更友善的 Web Test Script 開發環境。在 Geb 程式中，可以直接與其他 Java（Groovy）程式碼互相搭配，例如透過 JDBC 從資料庫取得資料，或是將測試結果利用 JavaMail 傳送電子郵件報告等。
 
